@@ -1,220 +1,208 @@
 const translations = {
-    en: {
-        hero_title: "The Architecture of Inevitability",
-        hero_subtitle: "Crafting digital necessities that empower humanity to evolve, thrive, and find collective happiness.",
-        hero_btn_primary: "Explore Necessity",
-        vision_tag: "The Philosophy",
-        vision_title: "Beyond Marketing: Pure Enlightenment.",
-        vision_desc: "Technology is either a distraction or a catalyst. At YouMustApp, we filter the noise of the digital age to create tools that are as essential as the air we breathe.",
-        apps_title: "Digital Ecosystem",
-        apps_tag: "A trilogy of human advancement.",
-        app_mustapp_desc: "Synthesizing understanding through immersive shadowing. Technology that expands the mind's horizon.",
-        app_lumina_desc: "The clarity of thought, refined. A digital sanctuary for knowledge architecture and deep focus.",
-        app_prokvote_desc: "Decentralizing trust through real-time democratic integrity. Ensuring every voice resonates in the void.",
-        badge_growth: "Growth",
-        badge_wisdom: "Wisdom",
-        badge_connection: "Connection",
-        poem_1: "Design as a necessity.",
-        poem_2: "Technology as a bridge.",
-        poem_3: "Humanity as the core.",
-        poem_4: "YOU MUST EVOLVE.",
-        footer_copy: "Designing a better world through essential utility."
-    },
     ko: {
-        hero_title: "필연의 아키텍처",
-        hero_subtitle: "인류가 진화하고, 번창하며, 집단적 행복을 찾을 수 있도록 돕는 디지털 필수품을 설계합니다.",
-        hero_btn_primary: "필연성 탐구하기",
-        vision_tag: "철학",
-        vision_title: "마케팅을 넘어선 순수한 계몽",
-        vision_desc: "기술은 산만함이거나 촉매제입니다. YouMustApp은 디지털 시대의 소음을 필터링하여 우리가 숨 쉬는 공기만큼 필수적인 도구를 만듭니다.",
-        apps_title: "디지털 에코시스템",
-        apps_tag: "인류 발전을 위한 세 가지 빛.",
-        app_mustapp_desc: "몰입형 쉐도잉을 통한 이해의 합성. 마음의 지평을 넓히는 기술.",
-        app_lumina_desc: "정제된 생각의 명료함. 지식 구조화와 깊은 집중을 위한 디지털 안식처.",
-        app_prokvote_desc: "실시간 민주적 무결성을 통한 신뢰의 분권화. 모든 목소리가 공허 속에서 울려 퍼지도록 보장합니다.",
-        badge_growth: "성장",
-        badge_wisdom: "지혜",
-        badge_connection: "연결",
-        poem_1: "필수로서의 디자인.",
-        poem_2: "가교로서의 기술.",
-        poem_3: "핵심으로서의 인류.",
-        poem_4: "당신은 반드시 진화해야 합니다.",
-        footer_copy: "필수적인 유용성을 통해 더 나은 세상을 디자인합니다."
+        nav_brand: "YouMustApp",
+        nav_contact: "Contact",
+        hero_line1: "You Must Achieve",
+        hero_line2: "Pure Purpose",
+        problem_title: "우리는 도구의 무게에<br>짓눌려 살고 있습니다.",
+        problem_desc: "산재한 앱, 끊임없는 알림, 복잡한 기능들.<br>도구가 목적을 압도하는 시대입니다.",
+        solution_title: "도구는 거들 뿐,<br>본질은 당신의 <strong>목적</strong>입니다.",
+        apps_label: "Selected Works",
+        tag_growth: "Growth",
+        tag_wisdom: "Wisdom",
+        tag_connection: "Connection",
+        mustapp_desc: "몰입형 쉐도잉을 통한 언어와 지식의 체득. 마음의 지평을 넓히는 가장 순수한 학습 도구.",
+        lumina_desc: "정제된 생각의 명료함. 지식 구조화와 깊은 집중을 위한 디지털 안식처.",
+        prok_desc: "실시간 민주적 무결성을 통한 신뢰의 분권화. 모든 목소리가 울려 퍼지는 공간.",
+        outro_title: "당신의 본질을 위해,",
+        outro_btn: "앱 살펴보기"
+    },
+    en: {
+        nav_brand: "YouMustApp",
+        nav_contact: "Contact",
+        hero_line1: "You Must Achieve",
+        hero_line2: "Pure Purpose",
+        problem_title: "We are being crushed<br>by the weight of our tools.",
+        problem_desc: "Scattered apps, constant notifications, complex features.<br>An era where tools overwhelm their purpose.",
+        solution_title: "Tools only support,<br>the essence is your <strong>Purpose</strong>.",
+        apps_label: "Selected Works",
+        tag_growth: "Growth",
+        tag_wisdom: "Wisdom",
+        tag_connection: "Connection",
+        mustapp_desc: "Mastering language and knowledge through immersive shadowing. The purest tool to expand your mind.",
+        lumina_desc: "Clarity of refined thought. A digital sanctuary for knowledge architecture and deep focus.",
+        prok_desc: "Decentralizing trust through real-time democratic integrity. A space where every voice resonates.",
+        outro_title: "For your pure essence,",
+        outro_btn: "Explore Apps"
     }
 };
 
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Core Experience: Three.js Nebula/Fluid Background
-    const initThree = () => {
-        const canvas = document.querySelector('#main-canvas');
-        const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 100);
-        camera.position.z = 5;
-
-        // Create a morphing "Necessary Sphere"
-        const geometry = new THREE.IcosahedronGeometry(2, 6);
-        const material = new THREE.MeshNormalMaterial({
-            wireframe: true,
-            transparent: true,
-            opacity: 0.1
-        });
-        const sphere = new THREE.Mesh(geometry, material);
-        scene.add(sphere);
-
-        // Ambient particles
-        const pCount = 500;
-        const pGeo = new THREE.BufferGeometry();
-        const pPos = new Float32Array(pCount * 3);
-        for (let i = 0; i < pCount * 3; i++) pPos[i] = (Math.random() - 0.5) * 15;
-        pGeo.setAttribute('position', new THREE.BufferAttribute(pPos, 3));
-        const pMat = new THREE.PointsMaterial({ size: 0.02, color: 0x5D5FEF, transparent: true, opacity: 0.5 });
-        const particles = new THREE.Points(pGeo, pMat);
-        scene.add(particles);
-
-        let mouseX = 0, mouseY = 0;
-        document.addEventListener('mousemove', (e) => {
-            mouseX = (e.clientX / window.innerWidth) - 0.5;
-            mouseY = (e.clientY / window.innerHeight) - 0.5;
-        });
-
-        const clock = new THREE.Clock();
-        const tick = () => {
-            const elapsedTime = clock.getElapsedTime();
-            sphere.rotation.y = elapsedTime * 0.15;
-            sphere.rotation.x = elapsedTime * 0.1;
-
-            // Sphere pulse
-            const scale = 1 + Math.sin(elapsedTime * 0.5) * 0.1;
-            sphere.scale.set(scale, scale, scale);
-
-            // Follow mouse
-            gsap.to(camera.position, {
-                x: mouseX * 2,
-                y: -mouseY * 2,
-                duration: 2,
-                ease: "power2.out"
-            });
-
-            renderer.render(scene, camera);
-            window.requestAnimationFrame(tick);
-        };
-        tick();
-
-        window.addEventListener('resize', () => {
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight);
-        });
-    };
-    initThree();
-
-    // 2. High-End Scrolling: Lenis & GSAP
-    const lens = new Lenis();
-    lens.on('scroll', ScrollTrigger.update);
-    gsap.ticker.add((time) => lens.raf(time * 1000));
-    gsap.ticker.lagSmoothing(0);
-
-    // 3. Narrative Motion: GSAP Scrollytelling
-    gsap.registerPlugin(ScrollTrigger);
-
-    // Hero Entrance
-    const heroTl = gsap.timeline();
-    heroTl.from(".logo-y, .logo-m, .logo-a", { y: -20, opacity: 0, stagger: 0.1, duration: 1, ease: "power4.out" })
-        .from(".kinetic-text", { y: 100, opacity: 0, duration: 1.2, ease: "power4.out" }, "-=0.6")
-        .from(".hero-sub", { y: 30, opacity: 0, duration: 1, ease: "power3.out" }, "-=0.8")
-        .from(".cta-liquid", { scale: 0.9, opacity: 0, duration: 0.8, ease: "back.out(1.7)" }, "-=0.6");
-
-    // Bento Scroll Parallax
-    gsap.from(".main-vision", {
-        scrollTrigger: {
-            trigger: "#vision",
-            start: "top 80%",
-            end: "bottom 20%",
-            scrub: 1
-        },
-        y: 100,
-        opacity: 0,
-    });
-
-    // Poem Section Reveal
-    gsap.utils.toArray(".poem-line").forEach((line, i) => {
-        gsap.from(line, {
-            scrollTrigger: {
-                trigger: line,
-                start: "top 90%",
-                toggleActions: "play none none reverse"
-            },
-            y: 50,
-            opacity: 0,
-            duration: 1,
-            delay: i * 0.2,
-            ease: "expo.out"
-        });
-    });
-
-    // Haptic Card Interaction
-    const cards = document.querySelectorAll('.haptic-card');
-    cards.forEach(card => {
-        card.addEventListener('mousemove', (e) => {
-            const { offsetX, offsetY, target } = e;
-            const { clientWidth, clientHeight } = card;
-            const x = (offsetX / clientWidth) - 0.5;
-            const y = (offsetY / clientHeight) - 0.5;
-            gsap.to(card.querySelector('.card-background img'), {
-                x: x * 40,
-                y: y * 40,
-                scale: 1.15,
-                duration: 0.8,
-                ease: "power2.out"
-            });
-            gsap.to(card, {
-                rotateY: x * 15,
-                rotateX: -y * 15,
-                duration: 0.8,
-                ease: "power2.out"
-            });
-        });
-        card.addEventListener('mouseleave', () => {
-            gsap.to(card.querySelector('.card-background img'), { x: 0, y: 0, scale: 1, duration: 1 });
-            gsap.to(card, { rotateY: 0, rotateX: 0, duration: 1, ease: "elastic.out(1, 0.3)" });
-        });
-    });
-
-    // 4. Custom Liquid Cursor
-    const cursor = document.querySelector('#liquid-cursor');
-    window.addEventListener('mousemove', (e) => {
-        gsap.to(cursor, {
-            x: e.clientX - 10,
-            y: e.clientY - 10,
-            duration: 0.15,
-            ease: "power2.out"
-        });
-    });
-
-    document.querySelectorAll('a, button, .haptic-card').forEach(el => {
-        el.addEventListener('mouseenter', () => gsap.to(cursor, { scale: 5, backgroundColor: "rgba(93, 95, 239, 0.2)", duration: 0.3 }));
-        el.addEventListener('mouseleave', () => gsap.to(cursor, { scale: 1, backgroundColor: "#f8fafc", duration: 0.3 }));
-    });
-
-    // 5. Intelligent Language System
+    // 0. Language Switching Logic
     const langBtns = document.querySelectorAll('.lang-btn');
     const translatableElements = document.querySelectorAll('[data-i18n]');
 
     function setLanguage(lang) {
-        translatableElements.forEach(el => {
-            const key = el.getAttribute('data-i18n');
-            if (translations[lang] && translations[lang][key]) {
-                el.textContent = translations[lang][key];
+        // Smooth transition
+        gsap.to(translatableElements, {
+            opacity: 0,
+            duration: 0.3,
+            onComplete: () => {
+                translatableElements.forEach(el => {
+                    const key = el.getAttribute('data-i18n');
+                    if (translations[lang] && translations[lang][key]) {
+                        el.innerHTML = translations[lang][key];
+                    }
+                });
+                gsap.to(translatableElements, { opacity: 1, duration: 0.3 });
             }
         });
+
         langBtns.forEach(btn => btn.classList.toggle('active', btn.getAttribute('data-lang') === lang));
         localStorage.setItem('preferredLang', lang);
     }
 
-    langBtns.forEach(btn => btn.addEventListener('click', () => setLanguage(btn.getAttribute('data-lang'))));
-    setLanguage(localStorage.getItem('preferredLang') || 'en');
+    langBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const lang = btn.getAttribute('data-lang');
+            setLanguage(lang);
+        });
+    });
+
+    // Set initial language
+    const savedLang = localStorage.getItem('preferredLang') || 'ko';
+    // Skip initial fade for the first load
+    translatableElements.forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (translations[savedLang] && translations[savedLang][key]) {
+            el.innerHTML = translations[savedLang][key];
+        }
+    });
+    langBtns.forEach(btn => btn.classList.toggle('active', btn.getAttribute('data-lang') === savedLang));
+    // 1. Initialize Lenis (Smooth Scroll)
+    const lenis = new Lenis({
+        duration: 1.2,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    });
+
+    function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+
+    // 2. Custom Cursor Logic
+    const cursor = document.querySelector('#custom-cursor');
+    const follower = document.querySelector('#cursor-follower');
+
+    window.addEventListener('mousemove', (e) => {
+        gsap.to(cursor, { x: e.clientX, y: e.clientY, duration: 0.1 });
+        gsap.to(follower, { x: e.clientX, y: e.clientY, duration: 0.3 });
+    });
+
+    // 3. Narrative Animations (GSAP)
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Navigation Visibility
+    ScrollTrigger.create({
+        start: 'top -100',
+        onUpdate: (self) => {
+            const nav = document.querySelector('#nav-system');
+            if (self.direction === 1) { // Scrolling down
+                nav.classList.add('visible');
+            } else if (self.scroll() < 100) {
+                nav.classList.remove('visible');
+            }
+        }
+    });
+
+    // SECTION 1: HERO -> Expand text on scroll
+    gsap.to('.hero-text', {
+        opacity: 1,
+        scale: 1.1,
+        scrollTrigger: {
+            trigger: '#hero',
+            start: 'top top',
+            end: 'bottom top',
+            scrub: true,
+        }
+    });
+
+    // SECTION 2: THE PROBLEM -> Falling Icons
+    const fallingContainer = document.querySelector('#falling-container');
+    const iconStyles = ['📱', '💬', '🔔', '📧', '🚀', '⭐', '🔥', '💎'];
+
+    for (let i = 0; i < 40; i++) {
+        const icon = document.createElement('div');
+        icon.className = 'falling-icon';
+        icon.textContent = iconStyles[Math.floor(Math.random() * iconStyles.length)];
+        icon.style.left = `${Math.random() * 100}%`;
+        icon.style.top = `-100px`;
+        fallingContainer.appendChild(icon);
+
+        gsap.fromTo(icon,
+            { y: 0, opacity: 0 },
+            {
+                y: window.innerHeight + 200,
+                opacity: 0.4,
+                rotate: Math.random() * 360,
+                duration: Math.random() * 3 + 2,
+                repeat: -1,
+                ease: 'none',
+                delay: Math.random() * 5,
+                scrollTrigger: {
+                    trigger: '#problem',
+                    start: 'top bottom',
+                    end: 'bottom top',
+                    toggleActions: 'play pause resume pause'
+                }
+            }
+        );
+    }
+
+    // SECTION 3: THE SOLUTION -> Converge to Point
+    const solutionTl = gsap.timeline({
+        scrollTrigger: {
+            trigger: '#solution',
+            start: 'top center',
+            end: 'bottom center',
+            scrub: 1,
+        }
+    });
+
+    solutionTl.from('.solution-title', { opacity: 0, y: 50 })
+        .from('.glowing-point', { scale: 0, opacity: 0 }, '-=0.5');
+
+    // SECTION 4: A.P.P DEFINITION -> Flow
+    const defItems = document.querySelectorAll('.def-item');
+    defItems.forEach((item, index) => {
+        gsap.to(item, {
+            opacity: 1,
+            y: 0,
+            scrollTrigger: {
+                trigger: item,
+                start: 'top 80%',
+                end: 'top 40%',
+                scrub: 1,
+            }
+        });
+    });
+
+    // SECTION 5: APPS -> Entrance
+    const appCards = document.querySelectorAll('.app-card');
+    appCards.forEach((card, index) => {
+        gsap.to(card, {
+            opacity: 1,
+            y: 0,
+            scrollTrigger: {
+                trigger: card,
+                start: 'top 85%',
+                end: 'top 50%',
+                scrub: 1,
+            }
+        });
+    });
+
+    // Initial Entrance
+    gsap.to('.hero-text', { opacity: 1, scale: 1, duration: 2, ease: 'expo.out' });
 });
