@@ -1,0 +1,11 @@
+{
+  "name": "mustapp",
+  "version": "1.0.0",
+  "description": "The Pure Canvas - YouMustApp",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

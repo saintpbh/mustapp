@@ -205,4 +205,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initial Entrance
     gsap.to('.hero-text', { opacity: 1, scale: 1, duration: 2, ease: 'expo.out' });
+
+    // Refresh ScrollTrigger after all assets (images) are loaded to correctly calculate positions
+    window.addEventListener('load', () => {
+        ScrollTrigger.refresh();
+    });
 });
