@@ -64,7 +64,148 @@ const translations = {
 };
 
 document.addEventListener('DOMContentLoaded', () => {
-    // --- Translation Logic ---
+    // --- 1. Three.js Particle Background ---
+    const initThree = () => {
+        const canvas = document.querySelector('#bg-canvas');
+        const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.z = 3;
+
+        // Particles
+        const particlesGeometry = new THREE.SphereGeometry(1, 64, 64);
+        const particlesMaterial = new THREE.PointsMaterial({
+            size: 0.005,
+            color: '#4f46e5',
+            transparent: true,
+            opacity: 0.6
+        });
+
+        // Create random points
+        const count = 3000;
+        const positions = new Float32Array(count * 3);
+        for (let i = 0; i < count * 3; i++) {
+            positions[i] = (Math.random() - 0.5) * 10;
+        }
+        const geometry = new THREE.BufferGeometry();
+        geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        const points = new THREE.Points(geometry, particlesMaterial);
+        scene.add(points);
+
+        let mouseX = 0;
+        let mouseY = 0;
+        document.addEventListener('mousemove', (e) => {
+            mouseX = (e.clientX / window.innerWidth) - 0.5;
+            mouseY = (e.clientY / window.innerHeight) - 0.5;
+        });
+
+        const animate = () => {
+            points.rotation.y += 0.001;
+            points.rotation.x += 0.0005;
+
+            // Subtle mouse interaction
+            gsap.to(points.rotation, {
+                x: mouseY * 0.2,
+                y: mouseX * 0.2,
+                duration: 2,
+                ease: "power2.out"
+            });
+
+            renderer.render(scene, camera);
+            requestAnimationFrame(animate);
+        };
+        animate();
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+    };
+    initThree();
+
+    // --- 2. GSAP Animations ---
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Initial Hero Animation
+    const tl = gsap.timeline();
+    tl.from("#navbar", { y: -100, opacity: 0, duration: 1, ease: "expo.out" })
+        .from("#hero h1", { y: 100, opacity: 0, duration: 1.2, ease: "power4.out" }, "-=0.5")
+        .from("#hero p", { y: 50, opacity: 0, duration: 1, ease: "power3.out" }, "-=0.7")
+        .from(".hero-btns", { scale: 0.8, opacity: 0, duration: 0.8, ease: "back.out(1.7)" }, "-=0.5");
+
+    // App Cards Scroll Animation
+    gsap.from(".app-card", {
+        scrollTrigger: {
+            trigger: ".app-grid",
+            start: "top 80%",
+        },
+        y: 100,
+        opacity: 0,
+        duration: 1,
+        stagger: 0.2,
+        ease: "power3.out"
+    });
+
+    // Philosophy Section Animation
+    gsap.from(".value-list li", {
+        scrollTrigger: {
+            trigger: ".value-list",
+            start: "top 80%",
+        },
+        x: -50,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.2,
+        ease: "power2.out"
+    });
+
+    // Glass Orb Hover Effect
+    const orb = document.querySelector('.glass-orb');
+    if (orb) {
+        orb.addEventListener('mousemove', (e) => {
+            const { offsetX, offsetY, target } = e;
+            const { clientWidth, clientHeight } = target;
+            const xPos = (offsetX / clientWidth) - 0.5;
+            const yPos = (offsetY / clientHeight) - 0.5;
+            gsap.to(orb, {
+                x: xPos * 50,
+                y: yPos * 50,
+                rotateX: -yPos * 30,
+                rotateY: xPos * 30,
+                duration: 0.6,
+                ease: "power2.out"
+            });
+        });
+        orb.addEventListener('mouseleave', () => {
+            gsap.to(orb, { x: 0, y: 0, rotateX: 0, rotateY: 0, duration: 1, ease: "elastic.out(1, 0.3)" });
+        });
+    }
+
+    // --- 3. Custom Cursor Logic ---
+    const cursor = document.querySelector('#custom-cursor');
+    const blur = document.querySelector('#cursor-blur');
+
+    document.addEventListener('mousemove', (e) => {
+        gsap.to(cursor, { x: e.clientX, y: e.clientY, duration: 0, });
+        gsap.to(blur, { x: e.clientX - 16, y: e.clientY - 16, duration: 0.15 });
+    });
+
+    document.querySelectorAll('a, button, .app-card').forEach(el => {
+        el.addEventListener('mouseenter', () => {
+            gsap.to(cursor, { scale: 4, opacity: 0.2, duration: 0.3 });
+            gsap.to(blur, { scale: 1.5, borderColor: '#4f46e5', duration: 0.3 });
+        });
+        el.addEventListener('mouseleave', () => {
+            gsap.to(cursor, { scale: 1, opacity: 1, duration: 0.3 });
+            gsap.to(blur, { scale: 1, borderColor: '#4f46e5', duration: 0.3 });
+        });
+    });
+
+    // --- 4. i18n Logic ---
     const langBtns = document.querySelectorAll('.lang-btn');
     const translatableElements = document.querySelectorAll('[data-i18n]');
 
@@ -76,78 +217,38 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Update Button Active State
         langBtns.forEach(btn => {
             btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
         });
 
-        // Save preference
         localStorage.setItem('preferredLang', lang);
     }
 
     langBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            setLanguage(btn.getAttribute('data-lang'));
-        });
+        btn.addEventListener('click', () => setLanguage(btn.getAttribute('data-lang')));
     });
 
-    // Load saved language or default to 'en'
     const savedLang = localStorage.getItem('preferredLang') || 'en';
     setLanguage(savedLang);
 
-
-    // --- Original Animations & Interactions ---
-    const fadeElems = document.querySelectorAll('.fade-in');
-
-    const appearOptions = {
-        threshold: 0.1,
-        rootMargin: "0px 0px -50px 0px"
-    };
-
-    const appearOnScroll = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (!entry.isIntersecting) return;
-            entry.target.classList.add('appear');
-            observer.unobserve(entry.target);
-        });
-    }, appearOptions);
-
-    fadeElems.forEach(elem => {
-        appearOnScroll.observe(elem);
-    });
-
-    const navbar = document.getElementById('navbar');
+    // Navbar scroll effect
     window.addEventListener('scroll', () => {
+        const navbar = document.getElementById('navbar');
         if (window.scrollY > 50) {
-            navbar.style.padding = '5px 0';
-            navbar.style.background = 'rgba(255, 255, 255, 0.95)';
-            navbar.style.boxShadow = '0 10px 30px rgba(0,0,0,0.05)';
+            gsap.to(navbar, { padding: "5px 0", backgroundColor: "rgba(255, 255, 255, 0.9)", boxShadow: "0 10px 30px rgba(0,0,0,0.05)", duration: 0.4 });
         } else {
-            navbar.style.padding = '15px 0';
-            navbar.style.background = 'rgba(255, 255, 255, 0.8)';
-            navbar.style.boxShadow = 'none';
+            gsap.to(navbar, { padding: "15px 0", backgroundColor: "rgba(255, 255, 255, 0.8)", boxShadow: "none", duration: 0.4 });
         }
     });
 
+    // Smooth scroll for anchors
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
             const target = document.querySelector(this.getAttribute('href'));
             if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
+                gsap.to(window, { duration: 1, scrollTo: target.offsetTop, ease: "power3.inOut" });
             }
         });
     });
-
-    setTimeout(() => {
-        fadeElems.forEach(el => {
-            const rect = el.getBoundingClientRect();
-            if (rect.top < window.innerHeight) {
-                el.classList.add('appear');
-            }
-        });
-    }, 100);
 });
