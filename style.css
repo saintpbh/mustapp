@@ -106,6 +106,38 @@ a {
     color: var(--primary-color);
 }
 
+.lang-switcher {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-left: 2rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.lang-btn {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 4px;
+    transition: var(--transition);
+}
+
+.lang-btn:hover {
+    color: var(--primary-color);
+}
+
+.lang-btn.active {
+    color: var(--primary-color);
+    background: rgba(79, 70, 229, 0.1);
+}
+
+.divider {
+    color: #e2e8f0;
+}
+
 /* Hero Section */
 #hero {
     height: 100vh;

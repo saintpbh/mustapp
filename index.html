@@ -22,22 +22,28 @@
         <div class="container">
             <div class="logo">You<span>Must</span>App</div>
             <ul class="nav-links">
-                <li><a href="#mission">Our Mission</a></li>
-                <li><a href="#apps">Applications</a></li>
-                <li><a href="#philosophy">Philosophy</a></li>
+                <li><a href="#mission" data-i18n="nav_mission">Our Mission</a></li>
+                <li><a href="#apps" data-i18n="nav_apps">Applications</a></li>
+                <li><a href="#philosophy" data-i18n="nav_philosophy">Philosophy</a></li>
             </ul>
+            <div class="lang-switcher">
+                <button class="lang-btn active" data-lang="en">EN</button>
+                <span class="divider">|</span>
+                <button class="lang-btn" data-lang="ko">KO</button>
+            </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
     <header id="hero">
         <div class="container hero-content">
-            <h1 class="fade-in">Essential Tools for <span>Your Best Life</span></h1>
-            <p class="fade-in delay-1">We create the apps you didn't know you needed, but now can't live without.
-                Designed to empower, inspire, and simplify.</p>
+            <h1 class="fade-in"><span data-i18n="hero_title_1">Essential Tools for</span> <span><span
+                        data-i18n="hero_title_2">Your Best Life</span></span></h1>
+            <p class="fade-in delay-1" data-i18n="hero_subtitle">We create the apps you didn't know you needed, but now
+                can't live without. Designed to empower, inspire, and simplify.</p>
             <div class="hero-btns fade-in delay-2">
-                <a href="#apps" class="btn btn-primary">Start Your Journey</a>
-                <a href="#mission" class="btn btn-secondary">Why You Must</a>
+                <a href="#apps" class="btn btn-primary" data-i18n="hero_btn_primary">Start Your Journey</a>
+                <a href="#mission" class="btn btn-secondary" data-i18n="hero_btn_secondary">Why You Must</a>
             </div>
         </div>
     </header>
@@ -45,11 +51,11 @@
     <!-- Mission Section -->
     <section id="mission">
         <div class="container text-center">
-            <span class="section-tag">Our Vision</span>
-            <h2>The Necessity of Pure Utility</h2>
-            <p class="section-desc">At YouMustApp, we believe technology should be an indispensable companion. We don't
-                just build apps; we create digital environments that you MUST experience to truly unlock your potential
-                and find daily happiness.</p>
+            <span class="section-tag" data-i18n="mission_tag">Our Vision</span>
+            <h2 data-i18n="mission_title">The Necessity of Pure Utility</h2>
+            <p class="section-desc" data-i18n="mission_desc">At YouMustApp, we believe technology should be an
+                indispensable companion. We don't just build apps; we create digital environments that you MUST
+                experience to truly unlock your potential and find daily happiness.</p>
         </div>
     </section>
 
@@ -57,8 +63,8 @@
     <section id="apps">
         <div class="container">
             <div class="text-center mb-50">
-                <span class="section-tag">The Ecosystem</span>
-                <h2>Tools for Transformation</h2>
+                <span class="section-tag" data-i18n="apps_tag">The Ecosystem</span>
+                <h2 data-i18n="apps_title">Tools for Transformation</h2>
             </div>
 
             <div class="app-grid">
@@ -66,30 +72,30 @@
                 <div class="app-card" id="mustapp">
                     <div class="app-icon shadow-icon">🌊</div>
                     <h3>MustApp</h3>
-                    <p>Master new languages through immersion. MustApp turns every video into a personalized classroom
-                        with advanced shadowing tools and seamless media management.</p>
-                    <span class="badge">Growth</span>
-                    <a href="#" class="download-link">Coming Summer 2026</a>
+                    <p data-i18n="app_mustapp_desc">Master new languages through immersion. MustApp turns every video
+                        into a personalized classroom with advanced shadowing tools and seamless media management.</p>
+                    <span class="badge" data-i18n="badge_growth">Growth</span>
+                    <a href="#" class="download-link" data-i18n="download_soon">Coming Summer 2026</a>
                 </div>
 
                 <!-- Lumina Suite -->
                 <div class="app-card highlight" id="lumina">
                     <div class="app-icon aura-icon">✨</div>
                     <h3>Lumina Suite</h3>
-                    <p>A trilogy of light for your mind. From writing with clarity (Note), to distraction-free reading
-                        (Books), and capturing fleeting ideas (Vignettes).</p>
-                    <span class="badge">Wisdom</span>
-                    <a href="#" class="download-link">Coming Summer 2026</a>
+                    <p data-i18n="app_lumina_desc">A trilogy of light for your mind. From writing with clarity (Note),
+                        to distraction-free reading (Books), and capturing fleeting ideas (Vignettes).</p>
+                    <span class="badge" data-i18n="badge_wisdom">Wisdom</span>
+                    <a href="#" class="download-link" data-i18n="download_soon">Coming Summer 2026</a>
                 </div>
 
                 <!-- PROK Vote -->
                 <div class="app-card" id="prokvote">
                     <div class="app-icon heart-icon">🤝</div>
                     <h3>PROK Vote</h3>
-                    <p>Empowering communities with transparent, real-time voting. A secure platform designed for
-                        fairness, ensuring every voice is heard in the moments that matter.</p>
-                    <span class="badge">Connection</span>
-                    <a href="#" class="download-link">Coming Summer 2026</a>
+                    <p data-i18n="app_prokvote_desc">Empowering communities with transparent, real-time voting. A secure
+                        platform designed for fairness, ensuring every voice is heard in the moments that matter.</p>
+                    <span class="badge" data-i18n="badge_connection">Connection</span>
+                    <a href="#" class="download-link" data-i18n="download_soon">Coming Summer 2026</a>
                 </div>
             </div>
         </div>
@@ -100,20 +106,23 @@
         <div class="container">
             <div class="philosophy-grid">
                 <div class="phi-text">
-                    <span class="section-tag">The Values</span>
-                    <h2>Designed with Heart</h2>
+                    <span class="section-tag" data-i18n="phi_tag">The Values</span>
+                    <h2 data-i18n="phi_title">Designed with Heart</h2>
                     <ul class="value-list">
                         <li>
-                            <strong>Human-Centric</strong>
-                            <p>We prioritize your well-being over metrics. No dark patterns, just pure utility.</p>
+                            <strong data-i18n="val_1_title">Human-Centric</strong>
+                            <p data-i18n="val_1_desc">We prioritize your well-being over metrics. No dark patterns, just
+                                pure utility.</p>
                         </li>
                         <li>
-                            <strong>Aesthetic Harmony</strong>
-                            <p>A clean digital space leads to a clean mind. We obsess over every pixel.</p>
+                            <strong data-i18n="val_2_title">Aesthetic Harmony</strong>
+                            <p data-i18n="val_2_desc">A clean digital space leads to a clean mind. We obsess over every
+                                pixel.</p>
                         </li>
                         <li>
-                            <strong>Sustainable Growth</strong>
-                            <p>Tools that evolve with you, helping you become the best version of yourself.</p>
+                            <strong data-i18n="val_3_title">Sustainable Growth</strong>
+                            <p data-i18n="val_3_desc">Tools that evolve with you, helping you become the best version of
+                                yourself.</p>
                         </li>
                     </ul>
                 </div>
@@ -129,7 +138,7 @@
     <footer>
         <div class="container text-center">
             <div class="logo">You<span>Must</span>App</div>
-            <p>&copy; 2026 YouMustApp. Creating an 이롭고 행복한 세상.</p>
+            <p>&copy; 2026 YouMustApp. <span data-i18n="footer_copy">Creating an 이롭고 행복한 세상.</span></p>
         </div>
     </footer>
 
