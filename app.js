@@ -137,17 +137,18 @@ document.addEventListener('DOMContentLoaded', () => {
         .from("#hero p", { y: 50, opacity: 0, duration: 1, ease: "power3.out" }, "-=0.7")
         .from(".hero-btns", { scale: 0.8, opacity: 0, duration: 0.8, ease: "back.out(1.7)" }, "-=0.5");
 
-    // App Cards Scroll Animation
-    gsap.from(".app-card", {
-        scrollTrigger: {
-            trigger: ".app-grid",
-            start: "top 80%",
-        },
-        y: 100,
-        opacity: 0,
-        duration: 1,
-        stagger: 0.2,
-        ease: "power3.out"
+    // Feature Rows Scroll Animation
+    gsap.utils.toArray(".feature-row").forEach((row, i) => {
+        gsap.from(row, {
+            scrollTrigger: {
+                trigger: row,
+                start: "top 85%",
+            },
+            x: i % 2 === 0 ? 100 : -100,
+            opacity: 0,
+            duration: 1.2,
+            ease: "power4.out"
+        });
     });
 
     // Philosophy Section Animation
